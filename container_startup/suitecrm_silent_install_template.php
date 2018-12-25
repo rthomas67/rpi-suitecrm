@@ -1,0 +1,35 @@
+<?php
+  $sugar_config_si = array (
+    'dbUSRData' => 'same',
+    'default_currency_iso4217' => 'USD',
+    'default_currency_name' => 'US Dollars',
+    'default_currency_significant_digits' => '2',
+    'default_currency_symbol' => '$',
+    'default_date_format' => 'Y-m-d',
+    'default_decimal_seperator' => '.',
+    'default_export_charset' => 'ISO-8859-1',
+    'default_language' => 'en_us',
+    'default_locale_name_format' => 's f l',
+    'default_number_grouping_seperator' => ',',
+    'default_time_format' => 'H:i',
+    'export_delimiter' => ',',
+    'setup_db_admin_password' => '${MARIADB_ROOT_PASSWORD}',
+    'setup_db_admin_user_name' => '${MARIADB_ROOT_USER}',
+    'setup_db_create_database' => 1,
+    'setup_db_database_name' => '${SUITECRM_DATABASE_NAME}',
+    'setup_db_drop_tables' => 0,
+    'setup_db_sugarsales_password' => '${MARIADB_ROOT_PASSWORD}', // THE DATABASE PASSWORD TO USE AFTER INSTALLATION TO CONNECT
+    'setup_db_sugarsales_password_retype' => '${MARIADB_ROOT_PASSWORD}', // AGAIN
+    'setup_db_sugarsales_user' => 'root', // THE DATABASE USER TO USE AFTER INSTALLATION TO CONNECT
+    'setup_db_create_sugarsales_user' => 0, // CREATE THE DATABASE USER TO USE AFTER INSTALLATION
+    'setup_db_host_name' => '${MARIADB_HOST}',
+    'setup_db_pop_demo_data' => false,
+    'setup_db_port_num' => '${MARIADB_PORT_NUMBER}', // DATABASE PORT
+    'setup_db_type' => 'mysql',
+    'setup_db_username_is_privileged' => true,
+    'setup_site_admin_user_name' => '${SUITECRM_ADMIN_USERNAME}',
+    'setup_site_admin_password' => '${SUITECRM_ADMIN_PASSWORD}',
+    'setup_site_admin_password_retype' => '${SUITECRM_ADMIN_PASSWORD}',
+    'setup_site_url' => 'http://${SUITECRM_HOST}',
+    'setup_system_name' => '${SUITECRM_SITE_NAME}',
+  );
