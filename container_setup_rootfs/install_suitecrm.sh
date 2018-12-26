@@ -10,6 +10,7 @@ chown -R www-data:www-data /opt/SuiteCRM-7.10.11
 chmod -R ugo+rw /opt/SuiteCRM-7.10.11/modules
 chmod -R ugo+rw /opt/SuiteCRM-7.10.11/upload
 chmod -R ugo+rw /opt/SuiteCRM-7.10.11/custom
+chmod -R ugo+rw /opt/SuiteCRM-7.10.11/cache
 
 # Also, presumably, we're done with the zip file now, so drop it to shrink the container
 # image a little.

@@ -27,17 +27,19 @@ RUN ./install_suitecrm.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     NGINX_HTTPS_PORT_NUMBER="443" \
     NGINX_HTTP_PORT_NUMBER="80" \
-    MARIADB_HOST="mariadb4suitecrm" \
+    MARIADB_HOST="" \
     MARIADB_PORT_NUMBER="3306" \
-    MARIADB_ROOT_PASSWORD="" \
     MARIADB_ROOT_USER="root" \
+    MARIADB_ROOT_PASSWORD="" \
+    MARIADB_SUITECRM_USER="" \
+    MARIADB_SUITECRM_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
     MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     SUITECRM_DATABASE_NAME="suitecrm" \
-    SUITECRM_DATABASE_PASSWORD="" \
-    SUITECRM_DATABASE_USER="suitecrm_dbuser" \
+    SUITECRM_CREATE_DATABASE="1" \
+    SUITECRM_DROP_TABLES="1" \
     SUITECRM_EMAIL="user@example.com" \
     SUITECRM_HOST="127.0.0.1" \
     SUITECRM_HTTP_TIMEOUT="120" \
@@ -57,6 +59,6 @@ EXPOSE 443
 
 COPY container_startup/* ./
 
-RUN chmod +x suitecrm_config_and_start.sh
+RUN chmod +x suitecrm-entrypoint.sh
 
-ENTRYPOINT ["suitecrm_config_and_start.sh"]
+ENTRYPOINT ["/suitecrm-entrypoint.sh"]

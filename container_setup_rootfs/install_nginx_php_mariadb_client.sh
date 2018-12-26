@@ -12,5 +12,6 @@ apt-get -y install supervisor
 
 # By default, supervisor is enabled as a system service, but in the docker container
 # it is only started manually by the docker ENTRYPOINT, so stop and disable the system service.
-systemctl stop supervisor
+
+# This gives an error anyway... guess it isn't needed:  systemctl stop supervisor
 systemctl disable supervisor
