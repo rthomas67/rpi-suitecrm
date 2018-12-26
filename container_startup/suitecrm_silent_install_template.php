@@ -20,7 +20,7 @@
     'setup_db_drop_tables' => 0,
     'setup_db_sugarsales_password' => '${MARIADB_ROOT_PASSWORD}', // THE DATABASE PASSWORD TO USE AFTER INSTALLATION TO CONNECT
     'setup_db_sugarsales_password_retype' => '${MARIADB_ROOT_PASSWORD}', // AGAIN
-    'setup_db_sugarsales_user' => 'root', // THE DATABASE USER TO USE AFTER INSTALLATION TO CONNECT
+    'setup_db_sugarsales_user' => '${MARIADB_ROOT_USER}', // THE DATABASE USER TO USE AFTER INSTALLATION TO CONNECT
     'setup_db_create_sugarsales_user' => 0, // CREATE THE DATABASE USER TO USE AFTER INSTALLATION
     'setup_db_host_name' => '${MARIADB_HOST}',
     'setup_db_pop_demo_data' => false,

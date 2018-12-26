@@ -18,3 +18,7 @@ start with X) but the site header seems to get crossed up at the php-fpm layer.
 # Editing Notes
 * ALWAYS convert scripts to UNIX format with LF instead of CR/LF
 * ALWAYS check for (and remove) whitespace characters after line continuation slash character
+
+# TODO
+* Map persistent volumes for uploaded data so it doesn't have to be extracted from the container and wouldn't be lost if the container crashed.
+* Add scripts for backing up and restoring the static files (uploads) and the MariaDB database (assuming a high likelihood of starting with this container and migrating to a "real" installation later.)
