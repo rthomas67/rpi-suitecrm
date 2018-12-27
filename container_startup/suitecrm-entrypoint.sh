@@ -28,7 +28,7 @@ if [ -z "${MARIADB_SUITECRM_PASSWORD}" ]; then
 fi
 
 # configure nginx with docker env params
-if [ ! -f /etc/nginx/sites_available/suitecrm ]; then
+if [ ! -f /etc/nginx/sites-available/suitecrm ]; then
     # Add defaults if they're missing from the env
     if [ ! -z "${NGINX_HTTPS_PORT_NUMBER}" ]; then
         export NGINX_HTTPS_PORT_NUMBER=443
