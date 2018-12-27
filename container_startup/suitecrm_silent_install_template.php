@@ -15,8 +15,7 @@
     'export_delimiter' => ',',
     'setup_db_admin_password' => '${MARIADB_ROOT_PASSWORD}',
     'setup_db_admin_user_name' => '${MARIADB_ROOT_USER}',
-    'setup_db_create_database' => ${SUITECRM_CREATE_DATABASE},
-    'setup_db_drop_tables' => ${SUITECRM_DROP_TABLES},
+    'setup_db_create_database' => '${SUITECRM_CREATE_DATABASE}',
     'setup_db_database_name' => '${SUITECRM_DATABASE_NAME}',
     'setup_db_sugarsales_password' => '${MARIADB_SUITECRM_PASSWORD}', // THE DATABASE PASSWORD TO USE AFTER INSTALLATION TO CONNECT
     'setup_db_sugarsales_password_retype' => '${MARIADB_SUITECRM_PASSWORD}', // AGAIN

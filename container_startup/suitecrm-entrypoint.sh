@@ -54,7 +54,14 @@ if [ ! -f /opt/suitecrm/config.php ]; then
     # (as they would be if the PHP silent install were run without sudo).  This is to avoid
     # permissions problems later when SuiteCRM tries to create files in cache/modules/..., etc.
     cd /opt/suitecrm
-    sudo -u www-data php -r "\$_SERVER['HTTP_HOST'] = 'localhost'; \$_SERVER['SERVER_PORT'] = '80'; \$_SERVER['SERVER_NAME'] = 'suitecrm';  \$_SERVER['REQUEST_URI'] = 'install.php';\$_REQUEST = array('goto' => 'SilentInstall', 'cli' => true);require_once 'install.php';";
+    php_request_vars="\$_SERVER['SERVER_SOFTWARE'] = 'NGINX';"
+    php_request_vars="$php_request_vars \$_SERVER['HTTP_HOST'] = 'localhost';"
+    php_request_vars="$php_request_vars \$_SERVER['SERVER_PORT'] = '80';"
+    php_request_vars="$php_request_vars \$_SERVER['SERVER_NAME'] = 'suitecrm';"
+    php_request_vars="$php_request_vars \$_SERVER['REQUEST_URI'] = 'install.php';"
+    php_request_vars="$php_request_vars \$_REQUEST = array('goto' => 'SilentInstall', 'cli' => true);"
+    php_request_vars="$php_request_vars "
+    sudo -u www-data php -r "${php_request_vars} require_once 'install.php';";
     # If sudo isn't working, remove "sudo -u www-data " from the previous line and uncomment the following line.
         # chown -R www-data:www-data cache
     cd /

@@ -1,0 +1,12 @@
+51,54c51,56
+< require_once('modules/Administration/QuickRepairAndRebuild.php');
+< $actions = array('clearAll');
+< $randc = new RepairAndClear();
+< $randc->repairAndClearAll($actions, array(translate('LBL_ALL_MODULES')), true, false);
+---
+> if (!isset($_SESSION['setup_db_create_database']) || $_SESSION['setup_db_create_database']) {
+>     require_once('modules/Administration/QuickRepairAndRebuild.php');
+>     $actions = array('clearAll');
+>     $randc = new RepairAndClear();
+>     $randc->repairAndClearAll($actions, array(translate('LBL_ALL_MODULES')), true, false);
+> }

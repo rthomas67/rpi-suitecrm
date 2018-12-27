@@ -1,5 +1,12 @@
 #!/usr/bin/qemu-arm-static /bin/sh
 
+# Note: The main php package is NOT installed here because it is bundled with
+# the Apache2 web server.  This setup will use nginx + php-fpm _instead_ of Apache2
+
+apt-get -y install mariadb-client
+apt-get -y install php-fpm php-mysql php-xml php-zip php-curl php-imap php-gd
+apt-get -y install nginx
+
 pi_php_ini_file=/etc/php/7.0/fpm/conf.d/90-pi-custom.ini
 echo "cgi.fix_pathinfo=0" > $pi_php_ini_file
 echo >> $pi_php_ini_file

@@ -1,5 +1,4 @@
 FROM raspbian/stretch
-#FROM jsurf/rpi-raspbian
 
 ENV LANG C.UTF-8
 ENV TZ America/Denver
@@ -9,25 +8,25 @@ RUN chmod +x /usr/bin/qemu-arm-static
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-COPY container_setup_rootfs/* ./
+# Main System Layer
+COPY container_setup_system/* ./container_setup_system/
+RUN chmod +x container_setup_system/base_packages_install.sh \
+    && container_setup_system/base_packages_install.sh
 
-RUN chmod +x \
-    update_package_manager.sh \
-    install_base_packages.sh \
-    install_nginx_php_mariadb_client.sh \
-    setup_php.sh \
-    install_suitecrm.sh
+# Web and App Server Layer
+COPY container_setup_server/* ./container_setup_server/
+RUN chmod +x container_setup_server/install_nginx_php_mariadb_client.sh \
+    && container_setup_server/install_nginx_php_mariadb_client.sh
 
-RUN ./update_package_manager.sh
-RUN ./install_base_packages.sh
-RUN ./install_nginx_php_mariadb_client.sh
-RUN ./setup_php.sh
-RUN ./install_suitecrm.sh
+# SuiteCRM Application Layer
+COPY container_setup_suitecrm/* ./container_setup_suitecrm/
+RUN chmod +x container_setup_suitecrm/suitecrm_install.sh \
+    && container_setup_suitecrm/suitecrm_install.sh
 
-ENV ALLOW_EMPTY_PASSWORD="no" \
-    NGINX_HTTPS_PORT_NUMBER="443" \
+# Container Config and Startup Layer
+ENV NGINX_HTTPS_PORT_NUMBER="443" \
     NGINX_HTTP_PORT_NUMBER="80" \
-    MARIADB_HOST="" \
+    MARIADB_HOST="mariadb4suitecrm" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_USER="root" \
     MARIADB_ROOT_PASSWORD="" \
@@ -39,12 +38,12 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     SUITECRM_DATABASE_NAME="suitecrm" \
     SUITECRM_CREATE_DATABASE="1" \
-    SUITECRM_DROP_TABLES="1" \
     SUITECRM_EMAIL="user@example.com" \
     SUITECRM_HOST="127.0.0.1" \
     SUITECRM_HTTP_TIMEOUT="120" \
     SUITECRM_LAST_NAME="Name" \
     SUITECRM_SITE_NAME="SuiteCRM - Powered by Raspberry Pi and Docker" \
+    ALLOW_EMPTY_PASSWORD="no" \
     SUITECRM_SMTP_HOST="" \
     SUITECRM_SMTP_PASSWORD="" \
     SUITECRM_SMTP_PORT="" \
@@ -57,8 +56,10 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 EXPOSE 80
 EXPOSE 443
 
+COPY container_setup_patches ./container_setup_patches/
+RUN chmod +x container_setup_patches/apply_patches.sh \
+    && container_setup_patches/apply_patches.sh
+
 COPY container_startup/* ./
-
 RUN chmod +x suitecrm-entrypoint.sh
-
 ENTRYPOINT ["/suitecrm-entrypoint.sh"]

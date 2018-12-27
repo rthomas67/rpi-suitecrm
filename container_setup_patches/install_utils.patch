@@ -1,0 +1,14 @@
+1579a1580,1586
+>     // Assume if setup_db_create_database was explicitly set to 0/false for a SilentInstall,
+>     // the intent was probably to leave the tables and users/passwords alone too.
+>     // setup_db_drop_tables drives most of that logic.
+>     if (isset($all_config_vars['setup_db_create_database']) && !$all_config_vars['setup_db_create_database']) {
+>         $all_config_vars['setup_db_drop_tables'] = false;
+>     }
+> 
+1581c1588,1590
+<         $_SESSION[$key] = $value;
+---
+>         installLog("SILENT SESSION key: $key == $value"); 
+> 	$_SESSION[$key] = $value;
+> 	installLog("   \$_SESSION['$key'] After == " . $_SESSION[$key]);

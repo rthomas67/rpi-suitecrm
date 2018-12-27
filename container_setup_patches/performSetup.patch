@@ -1,0 +1,42 @@
+70c70,71
+< 
+---
+> installLog("Before install_utils.php setup_db_create_database == '$setup_db_create_database'");
+> installLog("Before install_utils.php _SESSION['setup_db_create_database'] == '" . $_SESSION['setup_db_create_database'] . "'");
+72c73,74
+< 
+---
+> installLog("After install_utils.php setup_db_create_database == '$setup_db_create_database'");
+> installLog("After install_utils.php _SESSION['setup_db_create_database'] == '" . $_SESSION['setup_db_create_database'] . "'");
+174a177
+> installLog("Value of setup_db_create_database: '$setup_db_create_database'");
+343,354c346,361
+<     if ($new_tables) {
+<         echo $line_entry_format.$mod_strings['LBL_PERFORM_DEFAULT_USERS'].$line_exit_format;
+<         installLog($mod_strings['LBL_PERFORM_DEFAULT_USERS']);
+<         create_default_users();
+<         echo $mod_strings['LBL_PERFORM_DONE'];
+<     } else {
+<         echo $line_entry_format.$mod_strings['LBL_PERFORM_ADMIN_PASSWORD'].$line_exit_format;
+<         installLog($mod_strings['LBL_PERFORM_ADMIN_PASSWORD']);
+<         $db->setUserName($setup_db_sugarsales_user);
+<         $db->setUserPassword($setup_db_sugarsales_password);
+<         set_admin_password($setup_site_admin_password);
+<         echo $mod_strings['LBL_PERFORM_DONE'];
+---
+>     // Only try to set up users if the tables were dropped.  If they were not
+>     // just dropped and recreated, the users should still be there.
+>     if ($setup_db_drop_tables) {
+>         if ($new_tables) {
+>             echo $line_entry_format.$mod_strings['LBL_PERFORM_DEFAULT_USERS'].$line_exit_format;
+>             installLog($mod_strings['LBL_PERFORM_DEFAULT_USERS']);
+>             create_default_users();
+>             echo $mod_strings['LBL_PERFORM_DONE'];
+>         } else {
+>             echo $line_entry_format.$mod_strings['LBL_PERFORM_ADMIN_PASSWORD'].$line_exit_format;
+>             installLog($mod_strings['LBL_PERFORM_ADMIN_PASSWORD']);
+>             $db->setUserName($setup_db_sugarsales_user);
+>             $db->setUserPassword($setup_db_sugarsales_password);
+>             set_admin_password($setup_site_admin_password);
+>             echo $mod_strings['LBL_PERFORM_DONE'];
+>         }

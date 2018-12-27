@@ -14,7 +14,9 @@
 # This isn't a failure of apt-get.  It is an indication that the package
 # name is being interpreted as the next command.
 
-# ls /etc/apt/apt.conf.d
+apt-get -y update
+
+apt-get -y install --no-install-recommends apt-utils
 
 apt-get -y install --no-install-recommends \
     ca-certificates \
@@ -70,6 +72,11 @@ apt-get -y install --no-install-recommends \
     libpcre3 \
     libsqlite3-0
 
+# wget and unzip are required to fetch and unpack the SuiteCRM app
+# vim, less, net-tools are used for diagnostics when/if things aren't working
+# gettext-base is required for config modification using envsubst
+# patch is required for tweaks and fixes to the SuiteCRM app PHP code
+# Supervisor is used to run multiple services (e.g. nginx and php-fpm) using a single docker ENTRYPOINT
 apt-get -y install --no-install-recommends \
     wget \
     cron \
@@ -77,4 +84,11 @@ apt-get -y install --no-install-recommends \
     less \
     net-tools \
     gettext-base \
+    patch \
+    supervisor \
     unzip
+
+# By default, supervisor is enabled as a system service, but in the docker container
+# it is only started manually by the docker ENTRYPOINT, so this disables the system service.
+systemctl disable supervisor
+
