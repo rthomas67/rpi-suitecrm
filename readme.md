@@ -9,6 +9,15 @@ Derived from the docker build for mariadb from jsurf
 SuiteCRM install parts based on bitnami-docker-suitecrm
 * https://github.com/bitnami/bitnami-docker-suitecrm/blob/master/7/debian-9/Dockerfile
 
+# SuiteCRM "SilentInstall" Patches
+Using SilentInstall with '''setup_db_create_database = 0''' _should_ leave the database alone.
+However, the SuiteCRM install code is broken in several places.  The patch files that are
+applied at the end of the container construction fix things enough that the setup
+can initialize the config.php file without overwriting tables and data (including SuiteCRM users).
+
+This has been reported to the SuiteCRM project in case they want to make it work right.
+* https://github.com/salesagility/SuiteCRM/issues/6692
+
 # nginx pgp-fpm
 * The servername in the nginx config must match the public host.domain name used
 to access SuiteCRM or the PHP scripts/browser will complain about XSRF issues.

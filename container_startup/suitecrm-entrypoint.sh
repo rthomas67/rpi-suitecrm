@@ -61,6 +61,7 @@ if [ ! -f /opt/suitecrm/config.php ]; then
     php_request_vars="$php_request_vars \$_SERVER['REQUEST_URI'] = 'install.php';"
     php_request_vars="$php_request_vars \$_REQUEST = array('goto' => 'SilentInstall', 'cli' => true);"
     php_request_vars="$php_request_vars "
+    echo "php_request_vars = '${php_request_vars}'"
     sudo -u www-data php -r "${php_request_vars} require_once 'install.php';";
     # If sudo isn't working, remove "sudo -u www-data " from the previous line and uncomment the following line.
         # chown -R www-data:www-data cache
