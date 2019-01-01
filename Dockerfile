@@ -32,25 +32,25 @@ ENV NGINX_HTTPS_PORT_NUMBER="443" \
     MARIADB_ROOT_PASSWORD="" \
     MARIADB_SUITECRM_USER="" \
     MARIADB_SUITECRM_PASSWORD="" \
-    MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
-    MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
-    MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
-    MYSQL_CLIENT_CREATE_DATABASE_USER="" \
+    SUITECRM_SITE_NAME="SuiteCRM - Powered by Raspberry Pi and Docker" \
+    SUITECRM_ADMIN_USERNAME="admin" \
+    SUITECRM_ADMIN_PASSWORD="admin" \
     SUITECRM_DATABASE_NAME="suitecrm" \
     SUITECRM_CREATE_DATABASE="1" \
     SUITECRM_EMAIL="user@example.com" \
     SUITECRM_HOST="127.0.0.1" \
     SUITECRM_HTTP_TIMEOUT="120" \
     SUITECRM_LAST_NAME="Name" \
-    SUITECRM_SITE_NAME="SuiteCRM - Powered by Raspberry Pi and Docker" \
     ALLOW_EMPTY_PASSWORD="no" \
+    MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
+    MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
+    MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
+    MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     SUITECRM_SMTP_HOST="" \
     SUITECRM_SMTP_PASSWORD="" \
     SUITECRM_SMTP_PORT="" \
     SUITECRM_SMTP_PROTOCOL="" \
     SUITECRM_SMTP_USER="" \
-    SUITECRM_ADMIN_USERNAME="admin" \
-    SUITECRM_ADMIN_PASSWORD="admin" \
     SUITECRM_VALIDATE_USER_IP="yes"
     
 EXPOSE 80
@@ -61,5 +61,6 @@ RUN chmod +x container_setup_patches/apply_patches.sh \
     && container_setup_patches/apply_patches.sh
 
 COPY container_startup/* ./
+COPY VERSION ./
 RUN chmod +x suitecrm-entrypoint.sh
 ENTRYPOINT ["/suitecrm-entrypoint.sh"]
