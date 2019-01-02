@@ -1,25 +1,28 @@
 version: '2'
 services:
-  mariadb4suitecrm:
+  suitecrm-mariadb:
     image: 'jsurf/rpi-mariadb:latest'
     environment:
       - MYSQL_ROOT_PASSWORD=suiteCRM999
+    ports:
+      - '3306:3306'
     volumes:
-      - 'mariadb_data:/sys/fs/cgroup'
-  suitecrm:
-    image: 'rthomas67/rpi-suitecrm:latest'
+      - 'mariadb_sys:/sys/fs/cgroup'
+      - 'mariadb_data:/var/lib/mysql'
+  suitecrm-app:
+    image: 'rthomas67/rpi-suitecrm:v3'
     environment:
-      - MARIADB_HOST=mariadb
+      - MARIADB_HOST=suitecrm-mariadb
       - MARIADB_ROOT_PASSWORD=suiteCRM999
       - SUITECRM_CREATE_DATABASE=1
       - SUITECRM_DROP_TABLES=1
     ports:
-      - '80:80'
-      - '443:443'
+      - '11080:80'
+      - '11443:443'
     volumes:
       - 'suitecrm_upload:/opt/suitecrm/upload'
     depends_on:
-      - mariadb4suitecrm
+      - suitecrm-mariadb
 volumes:
   mariadb_data:
     driver: local
